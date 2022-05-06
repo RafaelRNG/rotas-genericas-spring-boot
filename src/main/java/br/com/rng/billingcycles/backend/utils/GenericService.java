@@ -1,5 +1,8 @@
 package br.com.rng.billingcycles.backend.utils;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public abstract class GenericService<E> {
@@ -8,6 +11,12 @@ public abstract class GenericService<E> {
 
     public GenericService(JpaRepository<E, Long> repository) {
         this.repository = repository;
+    }
+
+    public Page<E> pagination(Integer page, Integer lines, String direction, String orderBy) {
+        PageRequest pageRequest = PageRequest.of(page, lines, Direction.valueOf(direction), orderBy);
+
+        return this.repository.findAll(pageRequest);
     }
 
     public E findById(Long id) {
