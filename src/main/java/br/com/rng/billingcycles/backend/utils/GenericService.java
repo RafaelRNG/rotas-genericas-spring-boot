@@ -22,4 +22,12 @@ public abstract class GenericService<E> {
     public E findById(Long id) {
         return this.repository.findById(id).get();
     }
+
+    public void save(E object) {
+        this.repository.save(object);
+    }
+
+    public void delete(Long id) {
+        this.repository.deleteById(id);
+    }
 }
