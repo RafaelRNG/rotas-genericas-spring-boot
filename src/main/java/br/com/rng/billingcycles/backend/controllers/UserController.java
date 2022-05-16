@@ -2,7 +2,6 @@ package br.com.rng.billingcycles.backend.controllers;
 
 import br.com.rng.billingcycles.backend.entities.User;
 import br.com.rng.billingcycles.backend.repositories.UserRepository;
-import br.com.rng.billingcycles.backend.services.UserService;
 import br.com.rng.billingcycles.backend.utils.GenericService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,9 +12,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @RestController
 @RequestMapping(path = "/users")
 public class UserController extends GenericService<User> {
-
-    @Autowired
-    private UserService userService;
 
     public UserController(UserRepository userRepository) {
         super(userRepository);
@@ -48,7 +44,7 @@ public class UserController extends GenericService<User> {
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody User user) {
-        this.userService.update(id, user);
+        this.update(id, user);
 
         return ResponseEntity.noContent().build();
     }

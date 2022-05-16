@@ -1,28 +1,33 @@
 package br.com.rng.billingcycles.backend.entities;
 
+import br.com.rng.billingcycles.backend.utils.GenericEntity;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "tb_users")
-public class User {
+public class User extends GenericEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
-    public User(){}
+    public User() {
+    }
 
     public User(Long id, String name) {
-        this.id = id;
+        super(id);
         this.name = name;
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
